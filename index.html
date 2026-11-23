@@ -26,14 +26,14 @@ h1{font-family:Georgia,"Noto Serif Thai",serif;font-size:clamp(3rem,7vw,6.3rem);
 #crosshair{position:absolute;left:50%;top:50%;width:7px;height:7px;border:1px solid #fff3dfdd;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 4px #3a2419}
 #action{position:absolute;left:50%;top:calc(50% + 23px);transform:translateX(-50%);padding:8px 14px;border-radius:100px;background:var(--glass);border:1px solid var(--line);white-space:nowrap;font-size:.9rem}#action:hover{background:#59402b}
 .utilities{position:absolute;right:27px;bottom:25px;display:flex;gap:8px}.icon{border-radius:50%;width:41px;height:41px;font-size:1.15rem;display:grid;place-items:center}.icon:hover{background:#51392c}
-#stick{position:absolute;display:none;left:20px;bottom:116px;width:90px;height:90px;border:1px solid #ffe5b37d;border-radius:50%;background:#33221985;touch-action:none}#stick span{position:absolute;top:50%;left:50%;width:36px;height:36px;border:1px solid #ecca8f;border-radius:50%;background:#efc88e88;transform:translate(-50%,-50%);pointer-events:none}
+#stick{position:absolute;pointer-events:auto;user-select:none;-webkit-user-select:none;display:none;left:20px;bottom:116px;width:90px;height:90px;border:1px solid #ffe5b37d;border-radius:50%;background:#33221985;touch-action:none}#stick span{position:absolute;top:50%;left:50%;width:36px;height:36px;border:1px solid #ecca8f;border-radius:50%;background:#efc88e88;transform:translate(-50%,-50%);pointer-events:none}
 #fade{position:absolute;inset:0;background:#251913;pointer-events:none;opacity:0;transition:opacity .18s}#fade.active{opacity:1}
 dialog{position:fixed;max-height:calc(100dvh - 28px);width:min(850px,calc(100vw - 28px));padding:20px 22px;color:var(--cream);background:#30221c;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 100px #0009;text-align:center;overflow:auto}dialog::backdrop{background:#180f0de0;backdrop-filter:blur(7px)}
 .dialog-top{display:flex;align-items:center;justify-content:space-between;gap:15px;text-align:left}.dialog-top h2{margin:0;font-size:1.18rem;font-weight:600}
 #photo,#film{max-width:100%;max-height:67dvh;width:auto;height:auto;margin:14px auto 8px;display:block;object-fit:contain;border-radius:4px}
 #letter{max-width:440px;margin:30px auto;font-size:1.25rem;line-height:1.9;color:#f4dcc0}
 #photoNav{display:flex;align-items:center;justify-content:center;gap:14px}#photoCounter{min-width:82px;font-size:.87rem;color:#e9ccac}#help{width:min(440px,calc(100vw - 28px));text-align:left}#help p{line-height:1.7}kbd{background:#533b2e;padding:2px 6px;border-radius:4px}#error{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#30221c;padding:18px;border:1px solid var(--line);border-radius:15px;width:min(90vw,440px);z-index:10}
-@media(pointer:coarse){#stick{display:block}#lock{display:none}.desktop-only{display:none!important}}
+@media(any-pointer:coarse){#stick{display:block}#lock{display:none}.desktop-only{display:none!important}}
 @media(pointer:fine){.touch-only{display:none!important}}
 @media(max-width:670px){header{inset:12px 12px auto;gap:5px}#brand,#roomLabel{font-size:.78rem;padding:7px 9px}#intro{align-items:end;background:linear-gradient(0deg,#211611fa 0%,#271912e6 24%,#25170d34 68%,transparent 100%);padding-bottom:calc(8dvh + env(safe-area-inset-bottom))}h1{font-size:clamp(3rem,13vw,5rem)}.nav{bottom:max(13px,env(safe-area-inset-bottom));max-width:calc(100% - 16px);gap:2px}.nav button{padding:7px 8px;font-size:clamp(.65rem,2.7vw,.83rem)}.utilities{right:12px;bottom:66px}#hint{bottom:68px;left:12px;transform:none;max-width:calc(100% - 78px);white-space:normal;text-align:left;font-size:.75rem}#stick{left:15px;bottom:114px}dialog{padding:14px}}
 @media(prefers-reduced-motion:reduce){#fade{transition:none}}
@@ -46,7 +46,7 @@ dialog{position:fixed;max-height:calc(100dvh - 28px);width:min(850px,calc(100vw 
 <section id="intro" aria-labelledby="title"><div class="invitation"><div class="flourish" aria-hidden="true">♡</div><h1 id="title">บ้านของเรา</h1><p>เปิดประตูเข้ามาสิ<br>มีเรื่องราวของเรารออยู่ในบ้านหลังนี้</p><button id="start" class="primary">เปิดประตูเข้าบ้าน <span aria-hidden="true">→</span></button><small class="desktop-only">WASD เดิน · ลากเมาส์เพื่อมองรอบห้อง</small><small class="touch-only">ใช้ปุ่มวงกลมเดิน · ลากหน้าจอเพื่อมองรอบห้อง</small></div></section>
 <div id="hud" hidden>
  <div id="crosshair"></div><button id="action" class="hud-button" hidden></button>
- <p id="hint" class="pill"><span class="desktop-only">WASD / ลูกศร เดิน · ลากเพื่อมอง · E เพื่อเปิด</span><span class="touch-only">ปุ่มกลมใช้เดิน · ลากเพื่อมอง · แตะกรอบรูป</span></p>
+ <p id="hint" class="pill"><span class="desktop-only">WASD / ลูกศร เดิน · ลากเพื่อมอง · E เพื่อเปิด</span><span class="touch-only">ลากจอยเพื่อเดิน · ปัดขวาเพื่อหันขวา ปัดซ้ายเพื่อหันซ้าย</span></p>
  <div id="stick" aria-label="จอยเดิน"><span></span></div>
  <nav class="nav" aria-label="เลือกห้อง"><button class="hud-button" data-room="0">ความสุข</button><button class="hud-button" data-room="1">ประสบการณ์ร่วมกัน</button><button class="hud-button" data-room="2">อนาคต</button></nav>
  <div class="utilities"><button class="icon hud-button" id="gyro" aria-label="เปิดมุมมองตามมือถือ" title="มองตามมือถือ">หมุน</button><button class="icon hud-button" id="lock" title="จับเมาส์เพื่อมองรอบห้อง" aria-label="จับเมาส์เพื่อมองรอบห้อง">⌖</button><button class="icon hud-button" id="helpButton" title="วิธีเล่น" aria-label="วิธีเล่น">?</button></div>
@@ -637,7 +637,10 @@ canvas.addEventListener('pointermove',event=>{
   const dx=event.clientX-drag.x,dy=event.clientY-drag.y;
   drag.travel+=Math.hypot(dx,dy);
   drag.x=event.clientX;drag.y=event.clientY;
-  if(drag.travel>4) look(dx,dy);
+  if(drag.travel>4){
+    const sensitivity=event.pointerType==='touch' ? Math.min(2.6,650/canvas.clientWidth) : 1;
+    look(dx*sensitivity,dy*sensitivity);
+  }
 });
 canvas.addEventListener('pointerup',event=>{
   if(drag?.id!==event.pointerId) return;
@@ -660,11 +663,12 @@ $('stick').addEventListener('pointerdown',event=>{
   stickMove(event);
 });
 $('stick').addEventListener('pointermove',stickMove);
-$('stick').addEventListener('lostpointercapture',event=>{
+function releaseStick(event){
   if(stickPointer!==event.pointerId) return;
   stickPointer=null;stickX=stickY=0;
   $('stick').firstElementChild.style.transform='translate(-50%,-50%)';
-});
+}
+for(const type of ['pointerup','pointercancel','lostpointercapture']) $('stick').addEventListener(type,releaseStick);
 canvas.addEventListener('webglcontextlost',()=>{
   fail('การแสดงผลสามมิติหยุดชั่วคราว ลองโหลดหน้านี้ใหม่');
 },{once:true});
